@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AutoSaveTextArea</title>
+    <!-- roboto -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Jersey 20 Charted -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jersey+20+Charted&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Ubuntu+Sans+Mono:ital,wght@0,400..700;1,400..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jaro:opsz@6..72&family=Ubuntu+Sans+Mono:ital,wght@0,400..700;1,400..700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <h1>Auto Save TextArea</h1>
+    <textarea name="" id="" cols="30" rows="10"></textarea>
+
+    <div class="styling">
+      <div class="fontFamily">
+        <form action="">
+          <select name="" id="fontFamily">
+            <option value="roboto">Roboto</option>
+            <option value="Jersey 20 Charted">Jersey 20 Charted</option>
+            <option value="Ubuntu Sans Mono">Ubuntu Sans Mono</option>
+            <option value="Jaro">Jaro</option>
+          </select>
+          <button>Apply</button>
+        </form>
+      </div>
+      <button class="bold"><strong>B</strong></button>
+      <button class="italic"><i>I</i></button>
+      <button class="underline"><u>U</u></button>
+    </div>
+    <!-- js -->
+    <script>
+      const textarea = document.querySelector("textarea");
+      const fontFamily = document.querySelector("#fontFamily");
+      const bold = document
+        .querySelector(".bold")
+        .addEventListener("click", () => {
+          if (textarea.style.fontWeight == 600) {
+            textarea.style.fontWeight = 400;
+          } else textarea.style.fontWeight = 600;
+        });
+      const italic = document
+        .querySelector(".italic")
+        .addEventListener("click", () => {
+          if (textarea.style.fontStyle == "italic")
+            textarea.style.fontStyle = "normal";
+          else textarea.style.fontStyle = "italic";
+        });
+      const underline = document
+        .querySelector(".underline")
+        .addEventListener("click", () => {
+          if (textarea.style.textDecoration == "underline")
+            textarea.style.textDecoration = "none";
+          else textarea.style.textDecoration = "underline";
+        });
+      const Applybtn = document.querySelector("button");
+
+      //style
+      Applybtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        fontFamilyValue =
+          fontFamily.value.charAt(0).toUpperCase() + fontFamily.value.slice(1);
+        textarea.style.fontFamily = "'" + fontFamilyValue + "'";
+        document.querySelector("h1").style.fontFamily =
+          "'" + fontFamilyValue + "'";
+      });
+      //localStorage
+      if (localStorage.getItem("savedText")) {
+        textarea.value = localStorage.getItem("savedText");
+      }
+      textarea.addEventListener("input", () => {
+        localStorage.setItem("savedText", textarea.value);
+      });
+    </script>
+  </body>
+</html>
